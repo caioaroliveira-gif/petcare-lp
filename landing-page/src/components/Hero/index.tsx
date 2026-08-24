@@ -20,7 +20,7 @@ export default function Hero() {
         </p>
         <p className="text-center mt-5 text-pretty">
           Agende consultas, acompanhe vacinas e fale com veterinários <br />
-          sem sair do app. O PetCare organiza o que seu precisa, antes de você precisar lembrar.
+          sem sair do app. O PetCare organiza o que seu pet precisa, antes de você precisar lembrar.
         </p>
       </div>
 
@@ -33,12 +33,17 @@ export default function Hero() {
         </a>
       </div>
 
-      <div className="text-center mt-9 flex gap-15 font-extrabold">
-        <p>12 mil <FaPlus /></p>
-        <p>4.9 <FaStar /></p>
+      <div className="text-2xl text-center mt-9 flex gap-5 font-extrabold">
+        <p>12 mil </p> <FaPlus />
+        <p>4.9 </p> <FaStar />
         <p>24/7</p>
-        </div>
+      </div>
 
+      <div className="flex gap-5 text-center text-sm">
+        <p>pets cadastrados</p>
+        <p>avalição média</p>
+        <p>suporte via chat</p>
+      </div>
 
     </section>
 
