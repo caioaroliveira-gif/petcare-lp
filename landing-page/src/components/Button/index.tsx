@@ -1,18 +1,21 @@
 interface Buttons {
-        text: string;
-        color: string
-        text_color:string
-        backgroud_color:string;
+  text: string;
+  text_color: string;
+  background: string;
+  background_color: string;
 }
 
-
-export default function Button({text, color, text_color, backgroud_color}: Buttons){
-
-    return (
-        <>
-        <div>
-            
-        </div>
-        </>
-    )
+export default function Button({
+  text,
+  text_color,
+  background,
+  background_color,
+}: Buttons) {
+  return (
+    <>
+      <div className={`${background} ${background_color}`}>
+        <p className={`${text} font-medium text-sm ${text_color} `}>{text}</p>
+      </div>
+    </>
+  );
 }

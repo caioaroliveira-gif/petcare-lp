@@ -1,5 +1,6 @@
 import { MdOutlinePets } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import Button from "../../components/Button";
 
 export default function Hero() {
   return (
@@ -24,16 +25,25 @@ export default function Hero() {
       </div>
 
       <div className="mt-5 flex gap-5">
-        <a className="mt-5 bg-[#FF6B4A] text-white font-medium text-sm px-8 py-4 rounded-full shadow-2x1">
-          Ver funcionalidade
+        <a>
+          <Button
+            text="Ver Funcionalidades"
+            text_color="text-white"
+            background=" mt-5 px-8 py-4 rounded-full shadow-xl/30"
+            background_color="bg-[#FF6B4A]"
+          />
         </a>
-        <a className="mt-5 bg-[#1F4136] text-white font-medium text-sm px-8 py-4 rounded-full shadow-2x1">
-          Falar com um veterinário
+        <a>
+          <Button
+            text="Falar com um veterinário"
+            text_color="text-black"
+            background="mt-5 px-8 py-4 rounded-full shadow-xl/30"
+            background_color="bg-[#F5F5F5]"
+          />
         </a>
       </div>
 
       <div className="flex justify-center gap-8 mt-9 text-center">
-        
         <div className="flex flex-col items-center gap-1">
           <p className="text-2xl font-extrabold">12 mil+</p>
           <p className="text-sm text-gray-600">pets cadastrados</p>
@@ -51,7 +61,6 @@ export default function Hero() {
           <p className="text-sm text-gray-600">suporte via chat</p>
         </div>
       </div>
-      
     </section>
   );
 }
