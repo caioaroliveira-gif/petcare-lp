@@ -31,6 +31,7 @@ export default function Hero() {
             text_color="text-white"
             background=" mt-5 px-8 py-4 rounded-full shadow-xl/30"
             background_color="bg-[#FF6B4A]"
+            link="/"
           />
         </a>
         <a>
@@ -39,6 +40,7 @@ export default function Hero() {
             text_color="text-black"
             background="mt-5 px-8 py-4 rounded-full shadow-xl/30"
             background_color="bg-[#F5F5F5]"
+            link="/"
           />
         </a>
       </div>
