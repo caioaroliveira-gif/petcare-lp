@@ -2,34 +2,23 @@ import express, { type Request, type Response } from "express"
 import { randomUUID } from "node:crypto"
 import { pool } from "./database/conection.js"
 import { cliente_router } from "./routes/cliente.route.js"
+import { frotas_router } from "./routes/frotas.route.js"
+import { estoque_router } from "./routes/estoque.route.js"
+import { aumigo_router } from "./routes/aumigo.route.js"
+
+
 const app = express()
 const port = 3000
 
 app.use(express.json())
 
-app.use("cliente", cliente_router)
+app.use("/cliente", cliente_router);
 
-app.get("/frotas", async (request: Request, response: Response) => {
-    try {
-        const res = await pool.query("SELECT * FROM frotas")
+app.use("/frotas", frotas_router);
 
-        response.json(res.rows)
-    } catch (error) {
-        console.error(error);
-    }
-})
+app.use("/estoque", estoque_router);
 
-
-
-app.get("/estoque", async (request: Request, response: Response) => {
-    try {
-        const res = await pool.query("SELECT * FROM estoque")
-
-        response.json(res.rows)
-    } catch (error) {
-        console.error(error);
-    }
-})
+app.use("/aumigo", aumigo_router);
 
 app.get("/health", (request: Request, response: Response) => {
     return response.json({
