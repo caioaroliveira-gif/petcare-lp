@@ -3,6 +3,7 @@ interface Buttons {
   text_color: string;
   background: string;
   background_color: string;
+  link: string;
 }
 
 export default function Button({
@@ -13,9 +14,12 @@ export default function Button({
 }: Buttons) {
   return (
     <>
-      <div className={`${background} ${background_color}`}>
-        <p className={`${text} font-medium text-sm ${text_color} `}>{text}</p>
-      </div>
+      <a href={`{link}`}>
+        <div className={`${background} ${background_color}`}>
+          <p className={`${text} font-medium text-sm ${text_color} `}>{text}</p>
+
+        </div>
+      </a>
     </>
   );
 }
