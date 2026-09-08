@@ -1,5 +1,5 @@
 import { pool } from "../database/conection.js"
-import { Cliente } from "../types/cliente.js";
+import { Cliente, CriarCliente } from "../types/cliente.js";
 
 class ClienteService {
     async getAll() {
@@ -10,11 +10,16 @@ class ClienteService {
             console.error(error);
         }
     }
-    async create(nome: string, telefone: string, idade: number, email: string): Promise<Cliente> {
+    async create(dados: CriarCliente): Promise<Cliente> {
     const res = await pool.query<Cliente> 
-        ('INSERT INTO clientes (nome, telefone, idade, email) VALUES ($1, $2, $3, $4) RETURNING *', [nome, telefone, idade, email])
+        ('INSERT INTO clientes (nome, telefone, idade, email) VALUES ($1, $2, $3, $4) RETURNING *', [dados.nome, dados.telefone, dados.idade, dados.email])
 
-    return res.rows[0]
+    const cliente = res.rows[0]
+    if (!cliente) {
+        throw new Error("O banco não retornou o cliente cadastrado");
+    }
+
+    return cliente
 
     }
 
