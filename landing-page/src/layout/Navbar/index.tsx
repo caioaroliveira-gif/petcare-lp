@@ -37,6 +37,7 @@ export default function Navbar() {
           text="Agendar Consulta"
           text_color="text-white"
           background="hidden md:block px-6 py-2.5 rounded-full shadow-xl/30"
+          fontsize=""
           background_color="bg-[#153229]"
           link="/"
         />

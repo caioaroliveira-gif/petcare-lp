@@ -6,6 +6,7 @@ import { CiClock2 } from "react-icons/ci";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import Cards from "../../components/Cards";
 
+
 export default function Funcionalidade() {
   return (
     <>
