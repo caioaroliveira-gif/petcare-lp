@@ -10,6 +10,16 @@ class ClienteService {
             console.error(error);
         }
     }
+
+    async getById(id: string) {
+        try {
+            const res = await pool.query("SELECT * FROM clientes WHERE id = $1", [id])
+            return res.rows[0]
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async create(dados: CriarCliente): Promise<Cliente> {
     const res = await pool.query<Cliente> 
         ('INSERT INTO clientes (nome, telefone, idade, email) VALUES ($1, $2, $3, $4) RETURNING *', [dados.nome, dados.telefone, dados.idade, dados.email])
