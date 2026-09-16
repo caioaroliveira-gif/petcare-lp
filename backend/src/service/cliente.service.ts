@@ -11,6 +11,16 @@ class ClienteService {
         }
     }
 
+        async deleteById(id: string) {
+        try {
+            const res = await pool.query("DELETE FROM clientes WHERE id = $1 RETURNING *", [id])
+            return res.rows[0]
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     async getById(id: string) {
         try {
             const res = await pool.query("SELECT * FROM clientes WHERE id = $1", [id])

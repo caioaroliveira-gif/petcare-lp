@@ -52,3 +52,19 @@ cliente_router.post("/", async (request: Request<{}, {}, CriarCliente>, response
     })
 
 })
+
+
+cliente_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
+    try {
+        const res = await
+            clienteService.deleteById(request.params.id)
+
+        return response.json(res)
+    } catch (error) {
+        console.error(error);
+    }
+
+    return response.status(500).json({
+        erro: "Erro Interno"
+    })
+})
