@@ -1,14 +1,14 @@
 import { Router, type Request, type Response } from "express"
-import { clienteService } from "../service/cliente.service.js"
-import { CriarCliente } from "../types/cliente.js"
+import { log_sistemaService } from "../service/log_sistema.service.js"
+import { CriarLogSistema } from "../types/log_sistema.js"
 
-export const cliente_router = Router()
+export const log_sistema_router = Router()
 
 
-cliente_router.get("/", async (request: Request, response: Response) => {
+log_sistema_router.get("/", async (request: Request, response: Response) => {
     try {
         const res = await
-            clienteService.getAll()
+            log_sistemaService.getAll()
 
         return response.json(res)
     } catch (error) {
@@ -21,10 +21,10 @@ cliente_router.get("/", async (request: Request, response: Response) => {
 })
 
 
-cliente_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
+log_sistema_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
-            clienteService.getById(request.params.id)
+           log_sistemaService.getById(request.params.id)
 
         return response.json(res)
     } catch (error) {
@@ -37,11 +37,11 @@ cliente_router.get("/:id", async (request: Request<{ id: string }>, response: Re
 })
 
 
-cliente_router.post("/", async (request: Request<{}, {}, CriarCliente>, response: Response) => {
+log_sistema_router.post("/", async (request: Request<{}, {},CriarLogSistema>, response: Response) => {
     try {
         const dados = request.body
 
-        const cliente = await clienteService.create(dados)
+        const cliente = await log_sistemaService.create(dados)
         return response.status(201).json(cliente)
     } catch (error) {
         console.error(error);
@@ -54,10 +54,10 @@ cliente_router.post("/", async (request: Request<{}, {}, CriarCliente>, response
 })
 
 
-cliente_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
+log_sistema_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
-            clienteService.deleteById(request.params.id)
+            log_sistemaService.deleteById(request.params.id)
 
         return response.json(res)
     } catch (error) {
@@ -69,11 +69,11 @@ cliente_router.delete("/:id", async (request: Request<{ id: string }>, response:
     })
 })
 
-cliente_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
+log_sistema_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
-        const res = await clienteService.updateById(id);
+        const res = await log_sistemaService.updateById(id);
 
         return response.json(res)
     } catch (error) {
