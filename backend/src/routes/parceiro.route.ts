@@ -1,24 +1,24 @@
 import { Router, type Request, type Response } from "express"
-import { frotaService } from "../service/frota.service.js"
-import type {Frota, CriarFrota} from "../types/frota.js"
+import { parceiroService } from "../service/parceiro.service.js"
+import { CriarParceiro } from "../types/parceiro.js"
 
- export const frota_router = Router()
+export const parceiro_router = Router()
 
-frota_router.get("/", async (request: Request, response: Response) => {
+parceiro_router.get("/", async (request: Request, response: Response) => {
     try {
         const res = await
-        frotaService.getAll()
+            parceiroService.getAll()
 
-        response.json(res)
+            response.json(res)
     } catch (error) {
         console.error(error);
     }
 })
 
-frota_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
+parceiro_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
-           frotaService.getById(request.params.id)
+            parceiroService.getById(request.params.id)
 
         return response.json(res)
     } catch (error) {
@@ -31,12 +31,12 @@ frota_router.get("/:id", async (request: Request<{ id: string }>, response: Resp
 })
 
 
-frota_router.post("/", async (request: Request<{}, {}, CriarFrota>, response: Response) => {
+parceiro_router.post("/", async (request: Request<{}, {}, CriarParceiro>, response: Response) => {
     try {
         const dados = request.body
 
-        const cliente = await frotaService.create(dados)
-        return response.status(201).json(cliente)
+        const parceiro = await parceiroService.create(dados)
+        return response.status(201).json(parceiro)
     } catch (error) {
         console.error(error);
     }
@@ -48,10 +48,10 @@ frota_router.post("/", async (request: Request<{}, {}, CriarFrota>, response: Re
 })
 
 
-frota_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
+parceiro_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
-            frotaService.deleteById(request.params.id)
+            parceiroService.deleteById(request.params.id)
 
         return response.json(res)
     } catch (error) {
@@ -63,11 +63,11 @@ frota_router.delete("/:id", async (request: Request<{ id: string }>, response: R
     })
 })
 
-frota_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
+parceiro_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
-        const res = await frotaService.updateById(id);
+        const res = await parceiroService.updateById(id);
 
         return response.json(res)
     } catch (error) {
@@ -78,3 +78,4 @@ frota_router.patch("/inativar/:id", async (request: Request<{ id: string }>, res
         })
     }
 })
+

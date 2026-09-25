@@ -1,14 +1,15 @@
+import { funcionarioService } from "./../service/funcionario.service.js"
 import { Router, type Request, type Response } from "express"
-import { clienteService } from "../service/cliente.service.js"
-import { CriarCliente } from "../types/cliente.js"
-
-export const cliente_router = Router()
+import type { CriarFuncionario} from "../types/funcionario.js"
 
 
-cliente_router.get("/", async (request: Request, response: Response) => {
+export const funcionario_router = Router()
+
+
+funcionario_router.get("/", async (request: Request, response: Response) => {
     try {
         const res = await
-            clienteService.getAll()
+            funcionarioService.getAll()
 
         return response.json(res)
     } catch (error) {
@@ -21,10 +22,10 @@ cliente_router.get("/", async (request: Request, response: Response) => {
 })
 
 
-cliente_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
+funcionario_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
-            clienteService.getById(request.params.id)
+            funcionarioService.getById(request.params.id)
 
         return response.json(res)
     } catch (error) {
@@ -37,11 +38,11 @@ cliente_router.get("/:id", async (request: Request<{ id: string }>, response: Re
 })
 
 
-cliente_router.post("/", async (request: Request<{}, {}, CriarCliente>, response: Response) => {
+funcionario_router.post("/", async (request: Request<{}, {}, CriarFuncionario>, response: Response) => {
     try {
         const dados = request.body
 
-        const cliente = await clienteService.create(dados)
+        const cliente = await funcionarioService.create(dados)
         return response.status(201).json(cliente)
     } catch (error) {
         console.error(error);
@@ -54,10 +55,10 @@ cliente_router.post("/", async (request: Request<{}, {}, CriarCliente>, response
 })
 
 
-cliente_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
+funcionario_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
-            clienteService.deleteById(request.params.id)
+            funcionarioService.deleteById(request.params.id)
 
         return response.json(res)
     } catch (error) {
@@ -69,11 +70,11 @@ cliente_router.delete("/:id", async (request: Request<{ id: string }>, response:
     })
 })
 
-cliente_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
+funcionario_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
-        const res = await clienteService.updateById(id);
+        const res = await funcionarioService.updateById(id);
 
         return response.json(res)
     } catch (error) {
