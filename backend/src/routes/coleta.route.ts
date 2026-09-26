@@ -1,12 +1,12 @@
-import { Router, type Request, type Response } from "express";
-import { clienteService } from "../service/cliente.service.js";
-import { CriarCliente } from "../types/cliente.js";
+import {Router, type Request, type Response} from "express"
+import { coletaService } from "../service/coleta.service.js"
+import { CriarColeta } from "../types/coleta.js"
 
-export const cliente_router = Router();
+export const coleta_router = Router();
 
-cliente_router.get("/", async (request: Request, response: Response) => {
+coleta_router.get("/", async (request: Request, response: Response) => {
   try {
-    const res = await clienteService.getAll();
+    const res = await coletaService.getAll();
 
     return response.json(res);
   } catch (error) {
@@ -18,11 +18,11 @@ cliente_router.get("/", async (request: Request, response: Response) => {
   });
 });
 
-cliente_router.get(
+coleta_router.get(
   "/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     try {
-      const res = await clienteService.getById(request.params.id);
+      const res = await coletaService.getById(request.params.id);
 
       return response.json(res);
     } catch (error) {
@@ -35,14 +35,14 @@ cliente_router.get(
   },
 );
 
-cliente_router.post(
+coleta_router.post(
   "/",
-  async (request: Request<{}, {}, CriarCliente>, response: Response) => {
+  async (request: Request<{}, {}, CriarColeta>, response: Response) => {
     try {
       const dados = request.body;
 
-      const cliente = await clienteService.create(dados);
-      return response.status(201).json(cliente);
+      const coleta = await coletaService.create(dados);
+      return response.status(201).json(coleta);
     } catch (error) {
       console.error(error);
     }
@@ -53,11 +53,11 @@ cliente_router.post(
   },
 );
 
-cliente_router.delete(
+coleta_router.delete(
   "/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     try {
-      const res = await clienteService.deleteById(request.params.id);
+      const res = await coletaService.deleteById(request.params.id);
 
       return response.json(res);
     } catch (error) {
@@ -70,13 +70,13 @@ cliente_router.delete(
   },
 );
 
-cliente_router.patch(
+coleta_router.patch(
   "/inativar/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
-      const res = await clienteService.updateById(id);
+      const res = await coletaService.updateById(id);
 
       return response.json(res);
     } catch (error) {

@@ -1,9 +1,9 @@
-export interface Pet {
+export interface Servico {
   id: string;
   nome: string
 }
 
-export interface CriarPet {
+export interface CriarServico {
   id: string;
   nome: string
 }

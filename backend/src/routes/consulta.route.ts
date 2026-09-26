@@ -1,12 +1,12 @@
-import { Router, type Request, type Response } from "express";
-import { clienteService } from "../service/cliente.service.js";
-import { CriarCliente } from "../types/cliente.js";
+import {Router, type Request, type Response} from "express"
+import { consultaService } from "../service/consulta.service.js"
+import { CriarConsulta } from "../types/consulta.js"
 
-export const cliente_router = Router();
+export const consulta_router = Router();
 
-cliente_router.get("/", async (request: Request, response: Response) => {
+consulta_router.get("/", async (request: Request, response: Response) => {
   try {
-    const res = await clienteService.getAll();
+    const res = await consultaService.getAll();
 
     return response.json(res);
   } catch (error) {
@@ -18,11 +18,11 @@ cliente_router.get("/", async (request: Request, response: Response) => {
   });
 });
 
-cliente_router.get(
+consulta_router.get(
   "/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     try {
-      const res = await clienteService.getById(request.params.id);
+      const res = await consultaService.getById(request.params.id);
 
       return response.json(res);
     } catch (error) {
@@ -35,14 +35,14 @@ cliente_router.get(
   },
 );
 
-cliente_router.post(
+consulta_router.post(
   "/",
-  async (request: Request<{}, {}, CriarCliente>, response: Response) => {
+  async (request: Request<{}, {}, CriarConsulta>, response: Response) => {
     try {
       const dados = request.body;
 
-      const cliente = await clienteService.create(dados);
-      return response.status(201).json(cliente);
+      const consulta = await consultaService.create(dados);
+      return response.status(201).json(consulta);
     } catch (error) {
       console.error(error);
     }
@@ -53,11 +53,11 @@ cliente_router.post(
   },
 );
 
-cliente_router.delete(
+consulta_router.delete(
   "/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     try {
-      const res = await clienteService.deleteById(request.params.id);
+      const res = await consultaService.deleteById(request.params.id);
 
       return response.json(res);
     } catch (error) {
@@ -70,13 +70,13 @@ cliente_router.delete(
   },
 );
 
-cliente_router.patch(
+consulta_router.patch(
   "/inativar/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
-      const res = await clienteService.updateById(id);
+      const res = await consultaService.updateById(id);
 
       return response.json(res);
     } catch (error) {

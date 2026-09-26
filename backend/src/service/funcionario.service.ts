@@ -4,7 +4,7 @@ import type {CriarFuncionario, Funcionario} from "../types/funcionario.js"
 class FuncionarioService {
     async getAll() {
         try {
-            const res = await pool.query("SELECT * FROM cliente")
+            const res = await pool.query("SELECT * FROM funcionario")
             return res.rows
         } catch (error) {
             console.error(error);

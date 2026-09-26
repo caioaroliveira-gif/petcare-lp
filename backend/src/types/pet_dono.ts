@@ -1,5 +1,11 @@
-export interface Pet_Dono {
+export interface PetDono {
   id: string;
   id_animal: string;
-  id_cliente: string
+  id_cliente: string;
+}
+
+export interface CriarPetDono {
+  id: string;
+  id_animal: string;
+  id_cliente: string;
 }

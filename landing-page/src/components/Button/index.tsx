@@ -13,10 +13,11 @@ export default function Button({
   fontsize,
   background,
   background_color,
+  link
 }: Buttons) {
   return (
     <>
-      <a href={`{link}`}>
+      <a href={`${link}`}>
         <div className={`${background} ${background_color}`}>
           <p className={`${text} font-medium ${fontsize} ${text_color}`}>{text}</p>
 
