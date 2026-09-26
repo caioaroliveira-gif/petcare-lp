@@ -1,12 +1,12 @@
-import { Router, type Request, type Response } from "express";
-import { clienteService } from "../service/cliente.service.js";
-import { CriarCliente } from "../types/cliente.js";
+import {Router, type Request, type Response} from "express"
+import { registro_pontoService } from "../service/registro_ponto.service.js"
+import { CriarRegistroPonto } from "../types/registro_ponto.js"
 
-export const cliente_router = Router();
+export const registro_ponto_router = Router();
 
-cliente_router.get("/", async (request: Request, response: Response) => {
+registro_ponto_router.get("/", async (request: Request, response: Response) => {
   try {
-    const res = await clienteService.getAll();
+    const res = await registro_pontoService.getAll();
 
     return response.json(res);
   } catch (error) {
@@ -18,11 +18,11 @@ cliente_router.get("/", async (request: Request, response: Response) => {
   });
 });
 
-cliente_router.get(
+registro_ponto_router.get(
   "/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     try {
-      const res = await clienteService.getById(request.params.id);
+      const res = await registro_pontoService.getById(request.params.id);
 
       return response.json(res);
     } catch (error) {
@@ -35,14 +35,14 @@ cliente_router.get(
   },
 );
 
-cliente_router.post(
+registro_ponto_router.post(
   "/",
-  async (request: Request<{}, {}, CriarCliente>, response: Response) => {
+  async (request: Request<{}, {}, CriarRegistroPonto>, response: Response) => {
     try {
       const dados = request.body;
 
-      const cliente = await clienteService.create(dados);
-      return response.status(201).json(cliente);
+      const registro_ponto = await registro_pontoService.create(dados);
+      return response.status(201).json(registro_ponto);
     } catch (error) {
       console.error(error);
     }
@@ -53,11 +53,11 @@ cliente_router.post(
   },
 );
 
-cliente_router.delete(
+registro_ponto_router.delete(
   "/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     try {
-      const res = await clienteService.deleteById(request.params.id);
+      const res = await registro_pontoService.deleteById(request.params.id);
 
       return response.json(res);
     } catch (error) {
@@ -70,13 +70,13 @@ cliente_router.delete(
   },
 );
 
-cliente_router.patch(
+registro_ponto_router.patch(
   "/inativar/:id",
   async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
-      const res = await clienteService.updateById(id);
+      const res = await registro_pontoService.updateById(id);
 
       return response.json(res);
     } catch (error) {
