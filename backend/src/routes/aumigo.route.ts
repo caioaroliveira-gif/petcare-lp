@@ -35,8 +35,8 @@ aumigo_router.post("/", async (request: Request<{}, {}, CriarAumigo>, response: 
     try {
         const dados = request.body
 
-        const cliente = await aumigoService.create(dados)
-        return response.status(201).json(cliente)
+        const aumigo = await aumigoService.create(dados)
+        return response.status(201).json(aumigo)
     } catch (error) {
         console.error(error);
     }

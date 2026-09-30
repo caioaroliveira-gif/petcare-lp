@@ -1,4 +1,4 @@
-import { CriarEstoque, Estoque } from '../types/estoque.js';
+import { CriarEstoque } from '../types/estoque.js';
 import { estoqueService } from './../service/estoque.service.js';
 import { Router, type Request, type Response } from "express";
 

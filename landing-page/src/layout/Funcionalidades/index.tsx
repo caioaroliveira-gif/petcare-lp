@@ -10,7 +10,7 @@ import Cards from "../../components/Cards";
 export default function Funcionalidade() {
   return (
     <>
-      <section className="px-20">
+      <section className="px-20" id="funcionalidades">
         <div className="flex flex-col items-center justify-center">
           <div className=" mt-5 rounded-full flex gap-2 bg-[#DCEFE4] p-2">
             <p>Funcionalidades</p>

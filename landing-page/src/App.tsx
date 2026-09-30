@@ -3,6 +3,8 @@ import Hero from './layout/Hero';
 import Funcionalidade from './layout/Funcionalidades';
 import Info from './layout/Info';
 import Contact from './layout/Contact';
+import Footer from './layout/Footer';
+import WhatsButton from './components/Whatsapp';
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
     <Funcionalidade />
     <Info />
     <Contact />
+    <Footer />
+    <WhatsButton />
     </>
   )
 }
