@@ -1,7 +1,12 @@
+import dotenv from 'dotenv'
+import bcrypt from 'bcrypt'
 import { pool } from "../database/conection.js"
-import type {CriarFuncionario, Funcionario} from "../types/funcionario.js"
+import type { CriarFuncionario, Funcionario } from "../types/funcionario.js"
 
 class FuncionarioService {
+
+
+
     async getAll() {
         try {
             const res = await pool.query("SELECT * FROM funcionario")
@@ -12,6 +17,9 @@ class FuncionarioService {
     }
 
     async create(dados: CriarFuncionario): Promise<Funcionario> {
+        const bcrypt = require('bcrypt')
+        const salt_round = process.env.Bcrypt_Salt
+
         const res = await pool.query<Funcionario>
             ('INSERT INTO funcionario (nome, id_cargo, idade, email) VALUES ($1, $2, $3, $4) RETURNING *', [dados.nome, dados.id_cargo, dados.idade, dados.email])
 

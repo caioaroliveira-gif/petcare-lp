@@ -7,7 +7,6 @@ export interface Funcionario {
 }
 
  export interface CriarFuncionario {
-    id: string;
     nome: string;
     idade: number;
     email: string;

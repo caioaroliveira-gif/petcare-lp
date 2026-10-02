@@ -38,7 +38,7 @@ app.use("/consulta", consulta_router);
 
 app.use("/funcionario", funcionario_router);
 
-app.use("/logs do sistema", log_sistema_router);
+app.use("/logsdosistema", log_sistema_router);
 
 app.use("/parceiro", parceiro_router);
 
