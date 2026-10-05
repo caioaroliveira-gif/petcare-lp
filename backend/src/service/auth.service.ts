@@ -1,42 +1,39 @@
-import { pool } from "../database/conection.js"
-import bcrypt from 'bcrypt'
-import type { LoginData, LoginResponse } from "../types/login_funcionario.js"
-import 'dotenv/config'
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { pool } from "../database/conection.js";
+import type { LoginDTO, RespostaLogin } from "../types/auth.js";
 
-class authService {
+class AuthService {
+  async login({ email, senha }: LoginDTO): Promise<RespostaLogin | null> {
+    const res = await pool.query(
+      `SELECT f.id, f.nome, f.email, f.senha,
+          c.id AS cargo_id, c.nome AS cargo_nome
+   FROM funcionario f
+   JOIN cargo_func c ON c.id = f.id_cargo
+   WHERE f.email = $1`,
+      [email],
+    );
 
-  async getAll() {
-    try {
-      const res = await pool.query("SELECT * FROM funcionario")
-      return res.rows
-    } catch (error) {
-      console.error(error);
-    }
+    const func = res.rows[0];
+    if (!func) return null;
+
+    const senhaOk = await bcrypt.compare(senha, func.senha);
+    if (!senhaOk) return null;
+
+    const secret = process.env.JWT_SECRET;
+    if (!secret) throw new Error("JWT_SECRET não definido");
+
+    const token = jwt.sign({ id: func.id, cargo: func.cargo_id }, secret, {
+      expiresIn: "8h",
+    });
+
+    return {
+      nome: func.nome,
+      email: func.email,
+      cargo: { id: func.cargo_id, nome: func.cargo_nome },
+      token,
+    };
   }
-
-  async create(dados: LoginData): Promise<LoginData> {
-
-    const senhaForte = await bcrypt.hash(dados.senha, Number(process.env.SENHA_FORTE))
-
-    const res = await pool.query<LoginData>(
-      'INSERT INTO funcionario (nome, id_cargo, email, senha) VALUES ($1, $2, $3, $4) RETURNING *',
-      [dados.nome, dados.id_cargo, dados.email, senhaForte]
-    )
-
-    return res.rows[0]
-  }
-
-
-  async getById(id: string) {
-    try {
-      const res = await pool.query("SELECT * FROM funcionario WHERE id = $1", [id])
-      return res.rows[0]
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
 }
-export const auth_Service = new authService()
 
-
+export const authService = new AuthService();
