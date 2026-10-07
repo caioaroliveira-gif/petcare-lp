@@ -16,11 +16,14 @@ import { servico_router } from "./routes/servico.route.js";
 import { venda_router } from "./routes/venda.route.js";
 import "dotenv/config";
 import { auth_router } from "./routes/auth.route.js";
+import { ensureAuth } from "./middleware/authmiddleware.js";
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+
+app.use(ensureAuth)
 
 app.use("/cliente", cliente_router);
 
