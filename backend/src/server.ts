@@ -22,6 +22,8 @@ const port = 3000;
 
 app.use(express.json());
 
+app.use
+
 app.use("/cliente", cliente_router);
 
 app.use("/frotas", frota_router);
