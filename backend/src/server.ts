@@ -23,7 +23,11 @@ const port = 3000;
 
 app.use(express.json());
 
-app.use(ensureAuth)
+app.use("/auth", auth_router);
+
+app.use("/funcionario", funcionario_router);
+
+app.use(ensureAuth);
 
 app.use("/cliente", cliente_router);
 
@@ -41,8 +45,6 @@ app.use("/coleta", coleta_router);
 
 app.use("/consulta", consulta_router);
 
-app.use("/funcionario", funcionario_router);
-
 app.use("/logsdosistema", log_sistema_router);
 
 app.use("/parceiro", parceiro_router);
@@ -54,8 +56,6 @@ app.use("/registro-ponto", registro_ponto_router);
 app.use("/servico", servico_router);
 
 app.use("/venda", venda_router);
-
-app.use("/auth", auth_router);
 
 app.listen(port, () => {
   console.log(`API rodando em http://localhost:${port}`);

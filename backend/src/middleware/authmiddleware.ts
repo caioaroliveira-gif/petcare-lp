@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 export interface JwtPayLoad {
   id_func: string,
   nome: string,
-  email:string
+  email: string
 }
 
 export interface AuthReq extends Request {
@@ -20,21 +20,21 @@ export const ensureAuth = (
   const authHeader = request.headers.authorization
 
   if (!authHeader) {
-    return response.status(401).json({message: "Não foi provido autorização"})
+    return response.status(401).json({ message: "Não foi provido autorização" })
   }
 
   const [, token] = authHeader.split(" ")
 
   if (!token) {
-    return response.status(401).json({message: "Formato de token invalido"})
+    return response.status(401).json({ message: "Formato de token invalido" })
   }
 
   const JWT_SECRET = process.env.JWT_SECRET
 
   if (!JWT_SECRET) {
-    return response.status(500).json({message: "Chave não encontrada"})
+    return response.status(500).json({ message: "Chave não encontrada" })
 
-    
+
   }
 
   try {
@@ -44,6 +44,6 @@ export const ensureAuth = (
 
     return next()
   } catch (error) {
-    return response.status(401).json({message: "JWT invalido ou expirado"})
+    return response.status(401).json({ message: "JWT invalido ou expirado" })
   }
 }

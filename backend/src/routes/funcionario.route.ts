@@ -1,12 +1,13 @@
+import { ensureAuth } from './../middleware/authmiddleware.js';
 import { funcionarioService } from "./../service/funcionario.service.js"
 import { Router, type Request, type Response } from "express"
-import type { CriarFuncionario} from "../types/funcionario.js"
+import type { CriarFuncionario } from "../types/funcionario.js"
 
 
 export const funcionario_router = Router()
 
 
-funcionario_router.get("/", async (request: Request, response: Response) => {
+funcionario_router.get("/", ensureAuth, async (request: Request, response: Response) => {
     try {
         const res = await
             funcionarioService.getAll()
@@ -22,7 +23,7 @@ funcionario_router.get("/", async (request: Request, response: Response) => {
 })
 
 
-funcionario_router.get("/:id", async (request: Request<{ id: string }>, response: Response) => {
+funcionario_router.get("/:id", ensureAuth, async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
             funcionarioService.getById(request.params.id)
@@ -55,7 +56,7 @@ funcionario_router.post("/", async (request: Request<{}, {}, CriarFuncionario>, 
 })
 
 
-funcionario_router.delete("/:id", async (request: Request<{ id: string }>, response: Response) => {
+funcionario_router.delete("/:id", ensureAuth, async (request: Request<{ id: string }>, response: Response) => {
     try {
         const res = await
             funcionarioService.deleteById(request.params.id)
@@ -70,7 +71,7 @@ funcionario_router.delete("/:id", async (request: Request<{ id: string }>, respo
     })
 })
 
-funcionario_router.patch("/inativar/:id", async (request: Request<{ id: string }>, response: Response) => {
+funcionario_router.patch("/inativar/:id", ensureAuth, async (request: Request<{ id: string }>, response: Response) => {
     const { id } = request.params;
 
     try {
