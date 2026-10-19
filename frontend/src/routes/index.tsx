@@ -1,10 +1,19 @@
-import { BrowserRouter } from "react-router-dom"
-import AppRoutes from "./app.routes"
+import { BrowserRouter, Route, Routes as RouterRoutes } from "react-router-dom";
 
-export default  function Routes () {
+import { LoginPage } from "../features/auth";
+import { DashboardPage } from "../features/dashboard";
+import { PrivateRoute } from "./private-route";
+
+export const Routes = () => {
   return (
     <BrowserRouter>
-    <AppRoutes />
+      <RouterRoutes>
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<DashboardPage />} />
+        </Route>
+      </RouterRoutes>
     </BrowserRouter>
-  )
-}
+  );
+};
