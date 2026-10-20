@@ -17,7 +17,7 @@ class FuncionarioService {
   async create(dados: CriarFuncionario): Promise<Funcionario> {
     const saltRounds = Number(process.env.BCRYPT_SALT) || 12;
     const senhaHash = await bcrypt.hash(dados.senha, saltRounds);
-
+    
     const res = await pool.query<Funcionario>(
       "INSERT INTO funcionario (nome, id_cargo, email, senha) VALUES ($1, $2, $3, $4) RETURNING id, nome, id_cargo, email",
       [dados.nome, dados.id_cargo, dados.email, senhaHash],
