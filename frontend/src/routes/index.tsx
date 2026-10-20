@@ -9,6 +9,7 @@ export const Routes = () => {
     <BrowserRouter>
       <RouterRoutes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/cadastro" element={<LoginPage />} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<DashboardPage />} />
