@@ -1,29 +1,22 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { MdOutlinePets } from "react-icons/md";
-import { useRegister } from "../hooks/use-register";
-import { useLogin } from "../../auth/hooks/use-login";
-import { useRole } from "../../role/hooks/use-role";
 
-export default function RegisterPage() {
+import { useRegister } from "../hooks/use-login";
+
+
+export default function AuthPage() {
   const [nome, setNome] = useState("");
+  const [id_cargo, setIdCargo] = useState("405d74da-5363-4e26-86e5-2ddaca6657a4")
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [id_cargo, setId_cargo] = useState("");
 
   const { mutate: register, isPending, error } = useRegister();
-
-  const { mutate: login } = useLogin();
-
-  const { data: role } = useRole();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    register(
-      { nome, email, senha, id_cargo },
-      { onSuccess: () => login({ email, senha }) }
-    );
+    register({ nome, id_cargo, email, senha });
   }
 
   return (
@@ -35,23 +28,13 @@ export default function RegisterPage() {
       </div>
 
       <div className="text-center mt-10">
-        <p className="text-green text-3xl font-bold mb-4">Cadastre-se</p>
-        <p className="text-gray-dark mb-10">E tenha acesso aos serviços</p>
+        <p className="text-green text-3xl font-bold mb-4">
+          Entrar na sua conta
+        </p>
+        <p className="text-gray-dark mb-10">Acompanhe a rotina do seu pet</p>
       </div>
 
       <form onSubmit={handleSubmit} className="w-100 flex flex-col gap-4">
-        <div className="flex-1">
-          <p className="text-green mb-1 font-medium text-sm">Nome</p>
-          <input
-            type="text"
-            required
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-            placeholder="Seu nome"
-            className="bg-primary border-b border-gray-light pb-3 w-full text-sm font-medium"
-          />
-        </div>
-
         <div className="flex-1">
           <p className="text-green mb-1 font-medium text-sm">E-mail</p>
           <input
@@ -76,24 +59,6 @@ export default function RegisterPage() {
           />
         </div>
 
-        <div className="flex-1">
-          <p className="text-green mb-1 font-medium text-sm">Cargo</p>
-          <select
-            value={id_cargo}
-            onChange={(event) => setId_cargo(event.target.value)}
-            required
-          >
-            <option value="" disabled>
-              Selecione a role
-            </option>
-            {role?.map((cargo) => (
-              <option key={cargo.id} value={cargo.id}>
-                {cargo.nome}
-              </option>
-            ))}
-          </select>
-        </div>
-
         {error && (
           <p className="text-orange-primary text-sm font-medium">
             E-mail ou senha invalidos.
@@ -105,14 +70,14 @@ export default function RegisterPage() {
           disabled={isPending}
           className="bg-green-dark mt-10 text-white cursor-pointer shadow-brand transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(21,50,41,0.22)] font-semibold rounded-full py-3 w-full disabled:opacity-60"
         >
-          {isPending ? "Entrando..." : "Cadastre-se"}
+          {isPending ? "Entrando..." : "Entrar"}
         </button>
       </form>
 
       <div className="flex items-center gap-1 mt-6 text-sm">
-        <p className="text-gray-dark">Já tem conta?</p>
-        <a href="/login" className="text-green underline font-medium">
-          Então faça o login
+        <p className="text-gray-dark">Ainda não tem conta?</p>
+        <a href="" className="text-green underline font-medium">
+          Cadastre-seu pet
         </a>
       </div>
     </div>
