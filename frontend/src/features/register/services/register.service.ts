@@ -1,8 +1,10 @@
 import { api } from "../../../lib/api";
-import type { RegisterCredentials, Session } from "../types/auth.types";
+import type { RegisterCredentials } from "../types/register.types";
 
-export async function register(credentials: RegisterCredentials): Promise<Session> {
-  const response = await api.post<Session>("/funcionario", credentials);
+export async function register(
+  credentials: RegisterCredentials
+): Promise<void> {
+  const response = await api.post<void>("/funcionario", credentials);
 
   return response.data;
 }
