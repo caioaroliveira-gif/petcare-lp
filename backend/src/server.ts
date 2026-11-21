@@ -7,7 +7,7 @@ import { animalRouter} from "./routes/animal.route.js";
 import { cargo_funcRouter } from "./routes/cargo_func.route.js";
 import { coletaRouter } from "./routes/coleta.route.js";
 import { consultaRouter } from "./routes/consulta.route.js";
-import { funcionario_router } from "./routes/funcionario.route.js";
+import { funcionarioRouter } from "./routes/funcionario.route.js";
 import { log_sistema_router } from "./routes/log_sistema.route.js";
 import { parceiro_router } from "./routes/parceiro.route.js";
 import { pet_dono_router } from "./routes/pet_dono.route.js";
@@ -41,7 +41,7 @@ app.use("/coleta", coletaRouter);
 
 app.use("/consulta", consultaRouter);
 
-app.use("/funcionario", funcionario_router);
+app.use("/funcionario", funcionarioRouter);
 
 app.use(ensureAuth)
 app.use("/logsdosistema", log_sistema_router);

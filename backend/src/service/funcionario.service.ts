@@ -1,68 +1,21 @@
-import bcrypt from "bcrypt";
-import { pool } from "../database/conection.js";
-import type { CriarFuncionario, Funcionario } from "../types/funcionario.js";
+import type { CriarFuncionario } from "../types/funcionario.js";
+import { funcionarioRepository } from "../repositories/funcionario.repository.js";
 
 class FuncionarioService {
+  async create(funcionario: CriarFuncionario) {
+    return await funcionarioRepository.create(funcionario);
+  }
   async getAll() {
-    try {
-      const res = await pool.query(
-        "SELECT id, nome, email, id_cargo FROM funcionario",
-      );
-      return res.rows;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async create(dados: CriarFuncionario): Promise<Funcionario> {
-    const saltRounds = Number(process.env.BCRYPT_SALT) || 12;
-    const senhaHash = await bcrypt.hash(dados.senha, saltRounds);
-    
-    const res = await pool.query<Funcionario>(
-      "INSERT INTO funcionario (nome, id_cargo, email, senha) VALUES ($1, $2, $3, $4) RETURNING id, nome, id_cargo, email",
-      [dados.nome, dados.id_cargo, dados.email, senhaHash],
-    );
-
-    const funcionario = res.rows[0];
-    if (!funcionario) {
-      throw new Error("O banco não retornou o funcionario cadastrado");
-    }
-
-    return funcionario;
-  }
-
-  async updateById(id: string) {
-    try {
-      const res = await pool.query(
-        "UPDATE funcionario SET id = id WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await funcionarioRepository.getAll();
   }
   async getById(id: string) {
-    try {
-      const res = await pool.query(
-        "SELECT id, nome, email, id_cargo FROM funcionario WHERE id = $1",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await funcionarioRepository.getById(id);
   }
-  async deleteById(id: string) {
-    try {
-      const res = await pool.query(
-        "DELETE FROM funcionario WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+  async update(id: string, dados: CriarFuncionario) {
+    return await funcionarioRepository.update(id, dados);
+  }
+  async delete(id: string) {
+    return await funcionarioRepository.delete(id);
   }
 }
 export const funcionarioService = new FuncionarioService();
