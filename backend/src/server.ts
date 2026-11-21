@@ -9,7 +9,7 @@ import { coletaRouter } from "./routes/coleta.route.js";
 import { consultaRouter } from "./routes/consulta.route.js";
 import { funcionarioRouter } from "./routes/funcionario.route.js";
 import { log_sistemaRouter } from "./routes/log_sistema.route.js";
-import { parceiro_router } from "./routes/parceiro.route.js";
+import { parceiroRouter } from "./routes/parceiro.route.js";
 import { pet_dono_router } from "./routes/pet_dono.route.js";
 import { registro_ponto_router } from "./routes/registro_ponto.route.js";
 import { servico_router } from "./routes/servico.route.js";
@@ -46,7 +46,7 @@ app.use("/funcionario", funcionarioRouter);
 app.use(ensureAuth)
 app.use("/logsdosistema", log_sistemaRouter);
 
-app.use("/parceiro", parceiro_router);
+app.use("/parceiro", parceiroRouter);
 
 app.use("/pet-dono", pet_dono_router);
 
