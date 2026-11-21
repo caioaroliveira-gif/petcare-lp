@@ -12,7 +12,7 @@ import { log_sistemaRouter } from "./routes/log_sistema.route.js";
 import { parceiroRouter } from "./routes/parceiro.route.js";
 import { pet_donoRouter } from "./routes/pet_dono.route.js";
 import { registro_pontoRouter } from "./routes/registro_ponto.route.js";
-import { servico_router } from "./routes/servico.route.js";
+import { servicoRouter } from "./routes/servico.route.js";
 import { venda_router } from "./routes/venda.route.js";
 import "dotenv/config";
 import { auth_router } from "./routes/auth.route.js";
@@ -52,7 +52,7 @@ app.use("/pet-dono", pet_donoRouter);
 
 app.use("/registro-ponto", registro_pontoRouter);
 
-app.use("/servico", servico_router);
+app.use("/servico", servicoRouter);
 
 app.use("/venda", venda_router);
 

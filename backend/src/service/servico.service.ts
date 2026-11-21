@@ -1,59 +1,21 @@
-import { pool } from "../database/conection.js";
-import {Servico, CriarServico} from "../types/servico.js"
+import type { CriarServico } from "../types/servico.js";
+import { servicoRepository } from "../repositories/servico.repository.js";
 
 class ServicoService {
+  async create(servico: CriarServico) {
+    return await servicoRepository.create(servico);
+  }
   async getAll() {
-    try {
-      const res = await pool.query("SELECT * FROM servico");
-      return res.rows;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async create(dados: CriarServico): Promise<Servico> {
-    const res = await pool.query<Servico>(
-      "INSERT INTO servico (nome) VALUES ($1) RETURNING *",
-      [dados.nome],
-    );
-
-    const servico = res.rows[0];
-    if (!servico) {
-      throw new Error("O banco não retornou o serviço cadastrado");
-    }
-
-    return servico;
-  }
-
-  async updateById(id: string) {
-    try {
-      const res = await pool.query(
-        "UPDATE servico SET id = id WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await servicoRepository.getAll();
   }
   async getById(id: string) {
-    try {
-      const res = await pool.query("SELECT * FROM servico WHERE id = $1", [id]);
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await servicoRepository.getById(id);
   }
-  async deleteById(id: string) {
-    try {
-      const res = await pool.query(
-        "DELETE FROM servico WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+  async update(id: string, dados: CriarServico) {
+    return await servicoRepository.update(id, dados);
+  }
+  async delete(id: string) {
+    return await servicoRepository.delete(id);
   }
 }
 export const servicoService = new ServicoService();
