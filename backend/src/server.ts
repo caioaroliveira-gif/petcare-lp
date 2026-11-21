@@ -4,7 +4,7 @@ import { frota_router } from "./routes/frotas.route.js";
 import { estoque_router } from "./routes/estoque.route.js";
 import { aumigoRouter } from "./routes/aumigo.route.js";
 import { animalRouter} from "./routes/animal.route.js";
-import { cargo_func_router } from "./routes/cargo_func.route.js";
+import { cargo_funcRouter } from "./routes/cargo_func.route.js";
 import { coleta_router } from "./routes/coleta.route.js";
 import { consulta_router } from "./routes/consulta.route.js";
 import { funcionario_router } from "./routes/funcionario.route.js";
@@ -35,7 +35,7 @@ app.use("/aumigo", aumigoRouter);
 
 app.use("/animal", animalRouter);
 
-app.use("/cargo", cargo_func_router);
+app.use("/cargo", cargo_funcRouter);
 
 app.use("/coleta", coleta_router);
 
