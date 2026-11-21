@@ -1,55 +1,21 @@
-import { pool } from "../database/conection.js"
-import {CriarLogSistema, LogSistema} from "../types/log_sistema.js"
+import type { CriarLogSistema } from "../types/log_sistema.js";
+import { log_sistemaRepository } from "../repositories/log_sistema.repository.js";
 
-class LogSistemaService {
-    async getAll() {
-        try {
-            const res = await pool.query("SELECT * FROM log_sistema")
-            return res.rows
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    async create(dados: CriarLogSistema): Promise<LogSistema> {
-        const res = await pool.query<LogSistema>
-            ('INSERT INTO log_sistema (op_realizada, descricao, data, id_funcinario) VALUES ($1, $2, $3, $4) RETURNING *', [dados.op_realizada, dados.descricao, dados.data, dados.id_funcinario])
-
-        const log_sistema = res.rows[0]
-        if (!log_sistema) {
-            throw new Error("O banco não retornou o log do sistema");
-        }
-
-        return log_sistema
-
-    }
-
-    async updateById(id: string) {
-        try {
-            const res = await pool.query("UPDATE log_sistema SET id = id WHERE id = $1 RETURNING *", [id])
-            return res.rows[0]
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    async getById(id: string) {
-        try {
-            const res = await pool.query("SELECT * FROM log_sistema WHERE id = $1", [id])
-            return res.rows[0]
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    async deleteById(id: string) {
-        try {
-            const res = await pool.query("DELETE FROM log_sistema WHERE id = $1 RETURNING *", [id])
-            return res.rows[0]
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
+class Log_sistemaService {
+  async create(log_sistema: CriarLogSistema) {
+    return await log_sistemaRepository.create(log_sistema);
+  }
+  async getAll() {
+    return await log_sistemaRepository.getAll();
+  }
+  async getById(id: string) {
+    return await log_sistemaRepository.getById(id);
+  }
+  async update(id: string, dados: CriarLogSistema) {
+    return await log_sistemaRepository.update(id, dados);
+  }
+  async delete(id: string) {
+    return await log_sistemaRepository.delete(id);
+  }
 }
-export const log_sistemaService = new LogSistemaService()
-
-
+export const log_sistemaService = new Log_sistemaService();
