@@ -1,61 +1,21 @@
-import { pool } from "../database/conection.js";
-import { PetDono, CriarPetDono } from "../types/pet_dono.js";
+import type { CriarPetDono } from "../types/pet_dono.js";
+import { pet_donoRepository } from "../repositories/pet_dono.repository.js";
 
-class PetDonoService {
+class Pet_donoService {
+  async create(pet_dono: CriarPetDono) {
+    return await pet_donoRepository.create(pet_dono);
+  }
   async getAll() {
-    try {
-      const res = await pool.query("SELECT * FROM pet_dono");
-      return res.rows;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async create(dados: CriarPetDono): Promise<PetDono> {
-    const res = await pool.query<PetDono>(
-      "INSERT INTO PetDono (id_animal, id_cliente) VALUES ($1, $2) RETURNING *",
-      [dados.id_animal, dados.id_cliente],
-    );
-
-    const pet_dono = res.rows[0];
-    if (!pet_dono) {
-      throw new Error("O banco não retornou o Dono do pet cadastrado");
-    }
-
-    return pet_dono;
-  }
-
-  async updateById(id: string) {
-    try {
-      const res = await pool.query(
-        "UPDATE pet_dono SET id = id WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await pet_donoRepository.getAll();
   }
   async getById(id: string) {
-    try {
-      const res = await pool.query("SELECT * FROM pet_dono WHERE id = $1", [
-        id,
-      ]);
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await pet_donoRepository.getById(id);
   }
-  async deleteById(id: string) {
-    try {
-      const res = await pool.query(
-        "DELETE FROM pet_dono WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+  async update(id: string, dados: CriarPetDono) {
+    return await pet_donoRepository.update(id, dados);
+  }
+  async delete(id: string) {
+    return await pet_donoRepository.delete(id);
   }
 }
-export const pet_donoService = new PetDonoService();
+export const pet_donoService = new Pet_donoService();

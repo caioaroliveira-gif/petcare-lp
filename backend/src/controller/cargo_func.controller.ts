@@ -15,8 +15,8 @@ class Cargo_funcController {
 
   async getAll(req: Request, res: Response) {
     try {
-      const animais = await cargo_funcService.getAll();
-      return res.json(animais);
+      const cargoFuncs = await cargo_funcService.getAll();
+      return res.json(cargoFuncs);
     } catch (error) {
       console.error(error);
       return res.json({ message: "Erro interno do servidor" });

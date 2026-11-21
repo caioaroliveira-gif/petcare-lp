@@ -9,8 +9,8 @@ class Cargo_funcRepository {
     return cargo_funcCriado;
   }
   async getAll() {
-    const animais = await knex("cargo_func").select("*").returning("*");
-    return animais;
+    const cargoFuncs = await knex("cargo_func").select("*").returning("*");
+    return cargoFuncs;
   }
   async getById(id: string) {
     const [cargo_func] = await knex("cargo_func")

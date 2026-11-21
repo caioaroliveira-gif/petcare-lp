@@ -1,19 +1,19 @@
 import express from "express";
-import { cliente_router } from "./routes/cliente.route.js";
-import { frota_router } from "./routes/frotas.route.js";
-import { estoque_router } from "./routes/estoque.route.js";
+import { clienteRouter } from "./routes/cliente.route.js";
+import { frotaRouter } from "./routes/frota.route.js";
+import { estoqueRouter } from "./routes/estoque.route.js";
 import { aumigoRouter } from "./routes/aumigo.route.js";
 import { animalRouter} from "./routes/animal.route.js";
 import { cargo_funcRouter } from "./routes/cargo_func.route.js";
-import { coleta_router } from "./routes/coleta.route.js";
-import { consulta_router } from "./routes/consulta.route.js";
-import { funcionario_router } from "./routes/funcionario.route.js";
-import { log_sistema_router } from "./routes/log_sistema.route.js";
-import { parceiro_router } from "./routes/parceiro.route.js";
-import { pet_dono_router } from "./routes/pet_dono.route.js";
-import { registro_ponto_router } from "./routes/registro_ponto.route.js";
-import { servico_router } from "./routes/servico.route.js";
-import { venda_router } from "./routes/venda.route.js";
+import { coletaRouter } from "./routes/coleta.route.js";
+import { consultaRouter } from "./routes/consulta.route.js";
+import { funcionarioRouter } from "./routes/funcionario.route.js";
+import { log_sistemaRouter } from "./routes/log_sistema.route.js";
+import { parceiroRouter } from "./routes/parceiro.route.js";
+import { pet_donoRouter } from "./routes/pet_dono.route.js";
+import { registro_pontoRouter } from "./routes/registro_ponto.route.js";
+import { servicoRouter } from "./routes/servico.route.js";
+import { vendaRouter } from "./routes/venda.route.js";
 import "dotenv/config";
 import { auth_router } from "./routes/auth.route.js";
 import { ensureAuth } from "./middleware/authmiddleware.js";
@@ -25,11 +25,11 @@ app.use(express.json());
 
 app.use("/auth", auth_router);
 
-app.use("/cliente", cliente_router);
+app.use("/cliente", clienteRouter);
 
-app.use("/frotas", frota_router);
+app.use("/frotas", frotaRouter);
 
-app.use("/estoque", estoque_router);
+app.use("/estoque", estoqueRouter);
 
 app.use("/aumigo", aumigoRouter);
 
@@ -37,24 +37,24 @@ app.use("/animal", animalRouter);
 
 app.use("/cargo", cargo_funcRouter);
 
-app.use("/coleta", coleta_router);
+app.use("/coleta", coletaRouter);
 
-app.use("/consulta", consulta_router);
+app.use("/consulta", consultaRouter);
 
-app.use("/funcionario", funcionario_router);
+app.use("/funcionario", funcionarioRouter);
 
 app.use(ensureAuth)
-app.use("/logsdosistema", log_sistema_router);
+app.use("/logsdosistema", log_sistemaRouter);
 
-app.use("/parceiro", parceiro_router);
+app.use("/parceiro", parceiroRouter);
 
-app.use("/pet-dono", pet_dono_router);
+app.use("/pet-dono", pet_donoRouter);
 
-app.use("/registro-ponto", registro_ponto_router);
+app.use("/registro-ponto", registro_pontoRouter);
 
-app.use("/servico", servico_router);
+app.use("/servico", servicoRouter);
 
-app.use("/venda", venda_router);
+app.use("/venda", vendaRouter);
 
 
 app.listen(port, () => {
