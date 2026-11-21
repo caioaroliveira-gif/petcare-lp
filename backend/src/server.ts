@@ -1,6 +1,6 @@
 import express from "express";
 import { clienteRouter } from "./routes/cliente.route.js";
-import { frota_router } from "./routes/frotas.route.js";
+import { frotaRouter } from "./routes/frota.route.js";
 import { estoqueRouter } from "./routes/estoque.route.js";
 import { aumigoRouter } from "./routes/aumigo.route.js";
 import { animalRouter} from "./routes/animal.route.js";
@@ -27,7 +27,7 @@ app.use("/auth", auth_router);
 
 app.use("/cliente", clienteRouter);
 
-app.use("/frotas", frota_router);
+app.use("/frotas", frotaRouter);
 
 app.use("/estoque", estoqueRouter);
 
