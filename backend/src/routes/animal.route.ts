@@ -5,6 +5,6 @@ export const animalRouter = Router();
 
 animalRouter.post("/", animalController.create)
 animalRouter.get("/", animalController.getAll)
-animalRouter.get("/", animalController.getById)
-animalRouter.patch("/", animalController.update)
-animalRouter.delete("/", animalController.delete)
+animalRouter.get("/:id", animalController.getById)
+animalRouter.patch("/:id", animalController.update)
+animalRouter.delete("/:id", animalController.delete)

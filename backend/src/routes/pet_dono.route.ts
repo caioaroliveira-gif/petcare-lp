@@ -5,6 +5,6 @@ export const pet_donoRouter = Router();
 
 pet_donoRouter.post("/", pet_donoController.create)
 pet_donoRouter.get("/", pet_donoController.getAll)
-pet_donoRouter.get("/", pet_donoController.getById)
-pet_donoRouter.patch("/", pet_donoController.update)
-pet_donoRouter.delete("/", pet_donoController.delete)
+pet_donoRouter.get("/:id", pet_donoController.getById)
+pet_donoRouter.patch("/:id", pet_donoController.update)
+pet_donoRouter.delete("/:id", pet_donoController.delete)

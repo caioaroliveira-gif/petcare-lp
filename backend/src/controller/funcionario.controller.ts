@@ -47,8 +47,8 @@ class FuncionarioController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const funcionarioExcluido = await funcionarioService.delete(req.params.id)
-            return res.json(funcionarioExcluido)
+            const funcionarioDeletado = await funcionarioService.delete(req.params.id)
+            return res.json(funcionarioDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

@@ -5,6 +5,6 @@ export const funcionarioRouter = Router();
 
 funcionarioRouter.post("/", funcionarioController.create)
 funcionarioRouter.get("/", funcionarioController.getAll)
-funcionarioRouter.get("/", funcionarioController.getById)
-funcionarioRouter.patch("/", funcionarioController.update)
-funcionarioRouter.delete("/", funcionarioController.delete)
+funcionarioRouter.get("/:id", funcionarioController.getById)
+funcionarioRouter.patch("/:id", funcionarioController.update)
+funcionarioRouter.delete("/:id", funcionarioController.delete)

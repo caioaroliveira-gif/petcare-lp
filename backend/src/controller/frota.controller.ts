@@ -47,8 +47,8 @@ class FrotaController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const frotaExcluido = await frotaService.delete(req.params.id)
-            return res.json(frotaExcluido)
+            const frotaDeletado = await frotaService.delete(req.params.id)
+            return res.json(frotaDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

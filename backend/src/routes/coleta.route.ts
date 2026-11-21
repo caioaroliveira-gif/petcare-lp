@@ -5,6 +5,6 @@ export const coletaRouter = Router();
 
 coletaRouter.post("/", coletaController.create)
 coletaRouter.get("/", coletaController.getAll)
-coletaRouter.get("/", coletaController.getById)
-coletaRouter.patch("/", coletaController.update)
-coletaRouter.delete("/", coletaController.delete)
+coletaRouter.get("/:id", coletaController.getById)
+coletaRouter.patch("/:id", coletaController.update)
+coletaRouter.delete("/:id", coletaController.delete)

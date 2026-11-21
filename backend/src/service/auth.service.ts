@@ -11,7 +11,7 @@ class AuthService {
       c.id AS cargo_id, c.nome AS cargo_nome
       FROM funcionario f
       JOIN cargo_func c ON c.id = f.id_cargo
-      WHERE f.email = $1`,
+      WHERE f.email = ?`,
       [email],
     );
     

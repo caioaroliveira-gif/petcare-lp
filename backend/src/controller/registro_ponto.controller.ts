@@ -47,8 +47,8 @@ class Registro_pontoController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const registro_pontoExcluido = await registro_pontoService.delete(req.params.id)
-            return res.json(registro_pontoExcluido)
+            const registro_pontoDeletado = await registro_pontoService.delete(req.params.id)
+            return res.json(registro_pontoDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

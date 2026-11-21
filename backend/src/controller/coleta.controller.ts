@@ -47,8 +47,8 @@ class ColetaController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const coletaExcluido = await coletaService.delete(req.params.id)
-            return res.json(coletaExcluido)
+            const coletaDeletado = await coletaService.delete(req.params.id)
+            return res.json(coletaDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

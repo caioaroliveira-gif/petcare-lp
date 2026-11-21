@@ -1,5 +1,4 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { MdOutlinePets } from "react-icons/md";
 import { useRegister } from "../hooks/use-register";
 import { useLogin } from "../../auth/hooks/use-login";

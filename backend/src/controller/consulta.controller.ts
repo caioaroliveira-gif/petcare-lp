@@ -47,8 +47,8 @@ class ConsultaController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const consultaExcluido = await consultaService.delete(req.params.id)
-            return res.json(consultaExcluido)
+            const consultaDeletado = await consultaService.delete(req.params.id)
+            return res.json(consultaDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

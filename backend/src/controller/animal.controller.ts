@@ -47,8 +47,8 @@ class AnimalController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const animalExcluido = await animalService.delete(req.params.id)
-            return res.json(animalExcluido)
+            const animalDeletado = await animalService.delete(req.params.id)
+            return res.json(animalDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

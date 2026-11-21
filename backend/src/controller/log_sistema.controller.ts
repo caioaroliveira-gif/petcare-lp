@@ -47,8 +47,8 @@ class Log_sistemaController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const log_sistemaExcluido = await log_sistemaService.delete(req.params.id)
-            return res.json(log_sistemaExcluido)
+            const log_sistemaDeletado = await log_sistemaService.delete(req.params.id)
+            return res.json(log_sistemaDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

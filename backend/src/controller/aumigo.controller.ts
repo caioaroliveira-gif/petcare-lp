@@ -47,8 +47,8 @@ class AumigoController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const aumigoExcluido = await aumigoService.delete(req.params.id)
-            return res.json(aumigoExcluido)
+            const aumigoDeletado = await aumigoService.delete(req.params.id)
+            return res.json(aumigoDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})
