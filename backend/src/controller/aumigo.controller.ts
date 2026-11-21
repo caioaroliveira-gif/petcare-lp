@@ -17,8 +17,8 @@ class AumigoController {
 
     async getAll(req: Request, res: Response) {
         try {
-            const aumigo = await aumigoService.getAll()
-            return res.json(aumigo)
+            const aumigos = await aumigoService.getAll()
+            return res.json(aumigos)
         } catch (error) {
             console.error(error);
             return res.json({message: "Erro interno do servidor"})
