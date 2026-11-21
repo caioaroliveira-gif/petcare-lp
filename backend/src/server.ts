@@ -13,7 +13,7 @@ import { parceiroRouter } from "./routes/parceiro.route.js";
 import { pet_donoRouter } from "./routes/pet_dono.route.js";
 import { registro_pontoRouter } from "./routes/registro_ponto.route.js";
 import { servicoRouter } from "./routes/servico.route.js";
-import { venda_router } from "./routes/venda.route.js";
+import { vendaRouter } from "./routes/venda.route.js";
 import "dotenv/config";
 import { auth_router } from "./routes/auth.route.js";
 import { ensureAuth } from "./middleware/authmiddleware.js";
@@ -54,7 +54,7 @@ app.use("/registro-ponto", registro_pontoRouter);
 
 app.use("/servico", servicoRouter);
 
-app.use("/venda", venda_router);
+app.use("/venda", vendaRouter);
 
 
 app.listen(port, () => {

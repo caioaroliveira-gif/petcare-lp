@@ -1,59 +1,21 @@
-import { pool } from "../database/conection.js";
-import {Venda, CriarVenda} from "../types/venda.js"
+import type { CriarVenda } from "../types/venda.js";
+import { vendaRepository } from "../repositories/venda.repository.js";
 
 class VendaService {
+  async create(venda: CriarVenda) {
+    return await vendaRepository.create(venda);
+  }
   async getAll() {
-    try {
-      const res = await pool.query("SELECT * FROM venda");
-      return res.rows;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async create(dados: CriarVenda): Promise<Venda> {
-    const res = await pool.query<Venda>(
-      "INSERT INTO venda (id_item, id_funcionario, id_cliente, data) VALUES ($1, $2, $3, $4) RETURNING *",
-      [dados.id_item, dados.id_funcionario, dados.id_cliente, dados.data],
-    );
-
-    const venda = res.rows[0];
-    if (!venda) {
-      throw new Error("O banco não retornou a venda cadastrado");
-    }
-
-    return venda;
-  }
-
-  async updateById(id: string) {
-    try {
-      const res = await pool.query(
-        "UPDATE venda SET id = id WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await vendaRepository.getAll();
   }
   async getById(id: string) {
-    try {
-      const res = await pool.query("SELECT * FROM venda WHERE id = $1", [id]);
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await vendaRepository.getById(id);
   }
-  async deleteById(id: string) {
-    try {
-      const res = await pool.query(
-        "DELETE FROM venda WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+  async update(id: string, dados: CriarVenda) {
+    return await vendaRepository.update(id, dados);
+  }
+  async delete(id: string) {
+    return await vendaRepository.delete(id);
   }
 }
 export const vendaService = new VendaService();
