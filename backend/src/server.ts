@@ -1,9 +1,9 @@
-import express, { type Request, type Response } from "express";
+import express from "express";
 import { cliente_router } from "./routes/cliente.route.js";
 import { frota_router } from "./routes/frotas.route.js";
 import { estoque_router } from "./routes/estoque.route.js";
-import { aumigo_router } from "./routes/aumigo.route.js";
-import { animal_router } from "./routes/animal.route.js";
+import { aumigoRouter } from "./routes/aumigo.route.js";
+import { animalRouter} from "./routes/animal.route.js";
 import { cargo_func_router } from "./routes/cargo_func.route.js";
 import { coleta_router } from "./routes/coleta.route.js";
 import { consulta_router } from "./routes/consulta.route.js";
@@ -31,9 +31,9 @@ app.use("/frotas", frota_router);
 
 app.use("/estoque", estoque_router);
 
-app.use("/aumigo", aumigo_router);
+app.use("/aumigo", aumigoRouter);
 
-app.use("/animal", animal_router);
+app.use("/animal", animalRouter);
 
 app.use("/cargo", cargo_func_router);
 
