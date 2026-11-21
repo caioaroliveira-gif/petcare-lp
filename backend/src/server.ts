@@ -1,12 +1,12 @@
 import express from "express";
 import { clienteRouter } from "./routes/cliente.route.js";
 import { frota_router } from "./routes/frotas.route.js";
-import { estoque_router } from "./routes/estoque.route.js";
+import { estoqueRouter } from "./routes/estoque.route.js";
 import { aumigoRouter } from "./routes/aumigo.route.js";
 import { animalRouter} from "./routes/animal.route.js";
 import { cargo_funcRouter } from "./routes/cargo_func.route.js";
 import { coletaRouter } from "./routes/coleta.route.js";
-import { consulta_router } from "./routes/consulta.route.js";
+import { consultaRouter } from "./routes/consulta.route.js";
 import { funcionario_router } from "./routes/funcionario.route.js";
 import { log_sistema_router } from "./routes/log_sistema.route.js";
 import { parceiro_router } from "./routes/parceiro.route.js";
@@ -29,7 +29,7 @@ app.use("/cliente", clienteRouter);
 
 app.use("/frotas", frota_router);
 
-app.use("/estoque", estoque_router);
+app.use("/estoque", estoqueRouter);
 
 app.use("/aumigo", aumigoRouter);
 
@@ -39,7 +39,7 @@ app.use("/cargo", cargo_funcRouter);
 
 app.use("/coleta", coletaRouter);
 
-app.use("/consulta", consulta_router);
+app.use("/consulta", consultaRouter);
 
 app.use("/funcionario", funcionario_router);
 
