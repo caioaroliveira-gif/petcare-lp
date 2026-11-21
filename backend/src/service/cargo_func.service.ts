@@ -1,59 +1,21 @@
-import { pool } from "../database/conection.js";
-import {CargoFunc, CriarCargoFunc} from "../types/cargo_func.js"
+import type { CriarCargoFunc } from "../types/cargo_func.js";
+import { cargo_funcRepository } from "../repositories/cargo_func.repository.js";
 
-class CargoFuncService {
+class Cargo_funcService {
+  async create(cargo_func: CriarCargoFunc) {
+    return await cargo_funcRepository.create(cargo_func);
+  }
   async getAll() {
-    try {
-      const res = await pool.query("SELECT * FROM cargo_func");
-      return res.rows;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async create(dados: CriarCargoFunc): Promise<CargoFunc> {
-    const res = await pool.query<CargoFunc>(
-      "INSERT INTO cargo_func (nome) VALUES ($1) RETURNING *",
-      [dados.nome],
-    );
-
-    const cargo_func = res.rows[0];
-    if (!cargo_func) {
-      throw new Error("O banco não retornou o cargo cadastrado");
-    }
-
-    return cargo_func;
-  }
-
-  async updateById(id: string) {
-    try {
-      const res = await pool.query(
-        "UPDATE cargo_func SET id = id WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await cargo_funcRepository.getAll();
   }
   async getById(id: string) {
-    try {
-      const res = await pool.query("SELECT * FROM cargo_func WHERE id = $1", [id]);
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+    return await cargo_funcRepository.getById(id);
   }
-  async deleteById(id: string) {
-    try {
-      const res = await pool.query(
-        "DELETE FROM cargo_func WHERE id = $1 RETURNING *",
-        [id],
-      );
-      return res.rows[0];
-    } catch (error) {
-      console.error(error);
-    }
+  async update(id: string, dados: CriarCargoFunc) {
+    return await cargo_funcRepository.update(id, dados);
+  }
+  async delete(id: string) {
+    return await cargo_funcRepository.delete(id);
   }
 }
-export const cargo_funcService = new CargoFuncService();
+export const cargo_funcService = new Cargo_funcService();
