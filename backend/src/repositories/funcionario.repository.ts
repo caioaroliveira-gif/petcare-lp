@@ -13,12 +13,12 @@ class FuncionarioRepository {
 
     const [funcionarioCriado] = await knex("funcionario")
       .insert(dadosParaSalvar)
-      .returning("*");
+      .returning(["id", "nome", "email", "id_cargo"]);
     return funcionarioCriado;
   }
 
   async getAll() {
-    const funcionarios = await knex("funcionario").select("*").returning("*");
+    const funcionarios = await knex("funcionario").select("*").returning(["id", "nome", "email", "id_cargo"]);
     return funcionarios;
   }
 
@@ -26,7 +26,7 @@ class FuncionarioRepository {
     const [funcionario] = await knex("funcionario")
       .where({ id })
       .select("*")
-      .returning("*");
+      .returning(["id", "nome", "email", "id_cargo"]);
     return funcionario;
   }
 
@@ -34,7 +34,7 @@ class FuncionarioRepository {
     const [funcionarioAtualizado] = await knex("funcionario")
       .where({ id })
       .update(dados)
-      .returning("*");
+      .returning(["id", "nome", "email", "id_cargo"]);
     return funcionarioAtualizado;
   }
 
