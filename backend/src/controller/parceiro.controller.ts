@@ -47,8 +47,8 @@ class ParceiroController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const parceiroExcluido = await parceiroService.delete(req.params.id)
-            return res.json(parceiroExcluido)
+            const parceiroDeletado = await parceiroService.delete(req.params.id)
+            return res.json(parceiroDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

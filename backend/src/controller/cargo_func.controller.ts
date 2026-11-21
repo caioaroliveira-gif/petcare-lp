@@ -15,8 +15,8 @@ class Cargo_funcController {
 
   async getAll(req: Request, res: Response) {
     try {
-      const cargoFuncs = await cargo_funcService.getAll();
-      return res.json(cargoFuncs);
+      const cargos_func = await cargo_funcService.getAll();
+      return res.json(cargos_func);
     } catch (error) {
       console.error(error);
       return res.json({ message: "Erro interno do servidor" });
@@ -48,8 +48,8 @@ class Cargo_funcController {
 
   async delete(req: Request<{ id: string }>, res: Response) {
     try {
-      const cargo_funcExcluido = await cargo_funcService.delete(req.params.id);
-      return res.json(cargo_funcExcluido);
+      const cargo_funcDeletado = await cargo_funcService.delete(req.params.id);
+      return res.json(cargo_funcDeletado);
     } catch (error) {
       console.error(error);
       return res.json({ message: "Erro interno do servidor" });

@@ -1,29 +1,43 @@
+import bcrypt from "bcrypt";
 import { knex } from "../database/knex.js";
 import type { CriarFuncionario } from "../types/funcionario.js";
 
 class FuncionarioRepository {
   async create(dados: CriarFuncionario) {
-    const [funcionarioCriado] = await knex("funcionario").insert(dados).returning("*");
+    const saltRounds = Number(process.env.BCRYPT_SALT) || 10;
+    const senhaCriptografada = await bcrypt.hash(dados.senha, saltRounds);
+    const dadosParaSalvar = {
+      ...dados,
+      senha: senhaCriptografada,
+    };
+
+    const [funcionarioCriado] = await knex("funcionario")
+      .insert(dadosParaSalvar)
+      .returning(["id", "nome", "email", "id_cargo"]);
     return funcionarioCriado;
   }
+
   async getAll() {
-    const funcionarios = await knex("funcionario").select("*").returning("*");
+    const funcionarios = await knex("funcionario").select("*").returning(["id", "nome", "email", "id_cargo"]);
     return funcionarios;
   }
+
   async getById(id: string) {
     const [funcionario] = await knex("funcionario")
       .where({ id })
       .select("*")
-      .returning("*");
+      .returning(["id", "nome", "email", "id_cargo"]);
     return funcionario;
   }
+
   async update(id: string, dados: CriarFuncionario) {
     const [funcionarioAtualizado] = await knex("funcionario")
       .where({ id })
       .update(dados)
-      .returning("*");
+      .returning(["id", "nome", "email", "id_cargo"]);
     return funcionarioAtualizado;
   }
+
   async delete(id: string) {
     const [funcionarioDeletado] = await knex("funcionario")
       .where({ id })

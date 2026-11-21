@@ -5,6 +5,6 @@ export const estoqueRouter = Router();
 
 estoqueRouter.post("/", estoqueController.create)
 estoqueRouter.get("/", estoqueController.getAll)
-estoqueRouter.get("/", estoqueController.getById)
-estoqueRouter.patch("/", estoqueController.update)
-estoqueRouter.delete("/", estoqueController.delete)
+estoqueRouter.get("/:id", estoqueController.getById)
+estoqueRouter.patch("/:id", estoqueController.update)
+estoqueRouter.delete("/:id", estoqueController.delete)

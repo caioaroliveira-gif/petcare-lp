@@ -5,6 +5,6 @@ export const vendaRouter = Router();
 
 vendaRouter.post("/", vendaController.create)
 vendaRouter.get("/", vendaController.getAll)
-vendaRouter.get("/", vendaController.getById)
-vendaRouter.patch("/", vendaController.update)
-vendaRouter.delete("/", vendaController.delete)
+vendaRouter.get("/:id", vendaController.getById)
+vendaRouter.patch("/:id", vendaController.update)
+vendaRouter.delete("/:id", vendaController.delete)

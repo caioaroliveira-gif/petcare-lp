@@ -5,6 +5,6 @@ export const parceiroRouter = Router();
 
 parceiroRouter.post("/", parceiroController.create)
 parceiroRouter.get("/", parceiroController.getAll)
-parceiroRouter.get("/", parceiroController.getById)
-parceiroRouter.patch("/", parceiroController.update)
-parceiroRouter.delete("/", parceiroController.delete)
+parceiroRouter.get("/:id", parceiroController.getById)
+parceiroRouter.patch("/:id", parceiroController.update)
+parceiroRouter.delete("/:id", parceiroController.delete)

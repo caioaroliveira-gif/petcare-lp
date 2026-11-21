@@ -1,17 +1,17 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { pool } from "../database/conection.js";
+import {knex} from "../database/knex.js";
 import type { LoginDTO, RespostaLogin } from "../types/auth.ts";
 
 
 class AuthService {
   async login({ email, senha }: LoginDTO): Promise<RespostaLogin | null> {
-    const res = await pool.query(
+    const res = await knex.raw(
       `SELECT f.id, f.nome, f.email, f.senha,
       c.id AS cargo_id, c.nome AS cargo_nome
       FROM funcionario f
       JOIN cargo_func c ON c.id = f.id_cargo
-      WHERE f.email = $1`,
+      WHERE f.email = ?`,
       [email],
     );
     

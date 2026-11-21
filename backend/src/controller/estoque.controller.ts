@@ -47,8 +47,8 @@ class EstoqueController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const estoqueExcluido = await estoqueService.delete(req.params.id)
-            return res.json(estoqueExcluido)
+            const estoqueDeletado = await estoqueService.delete(req.params.id)
+            return res.json(estoqueDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})

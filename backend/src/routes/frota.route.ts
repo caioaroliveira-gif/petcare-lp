@@ -5,6 +5,6 @@ export const frotaRouter = Router();
 
 frotaRouter.post("/", frotaController.create)
 frotaRouter.get("/", frotaController.getAll)
-frotaRouter.get("/", frotaController.getById)
-frotaRouter.patch("/", frotaController.update)
-frotaRouter.delete("/", frotaController.delete)
+frotaRouter.get("/:id", frotaController.getById)
+frotaRouter.patch("/:id", frotaController.update)
+frotaRouter.delete("/id", frotaController.delete)

@@ -47,8 +47,8 @@ class Pet_donoController {
 
     async delete(req: Request<{id: string}>, res: Response) {
         try {
-            const pet_donoExcluido = await pet_donoService.delete(req.params.id)
-            return res.json(pet_donoExcluido)
+            const pet_donoDeletado = await pet_donoService.delete(req.params.id)
+            return res.json(pet_donoDeletado)
         } catch (error) {
             console.error(error)
             return res.json({message: "Erro interno do servidor"})
